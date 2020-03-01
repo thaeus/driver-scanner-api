@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  2020.sdvoterapi:
+    environment:
+      - VIRTUAL_HOST=sdvoters.2020.codes
+      - LETSENCRYPT_HOST=sdvoters.2020.codes
+    build: .
+    image: mountain/2020.sdvoterapi
+    container_name: 2020.sdvoterapi
+    ports:
+      # strapi runs on port 1337, so map this port out to port 7002 to access it.  the container always
+      # specifies this it exposes this port in the Dockerfile.  to change this port (1337), change Dockerfile
+      - 7010:7010
+    networks:
+      - mongonet
+    restart: always
+
+networks:
+  mongonet:
+    external: true
+
