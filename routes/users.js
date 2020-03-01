@@ -7,14 +7,19 @@ const curl = new Curl();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+
+
+
+	var voterInfo = JSON.parse(req.query.voterInfo);
 	const data = {
-		'houseNumber': '8036',
-		'birthMonth': '05',
-		'birthDay': '20',
-		'birthYear': '1982',
-		'zipCode': '92111'
+		'houseNumber': voterInfo.houseNumber,
+		'birthMonth':  voterInfo.birthMonth,
+		'birthDay':  voterInfo.birthDay,
+		'birthYear': voterInfo.birthYear,
+		'zipCode': voterInfo.zipCode
 	}
 
+	console.log(data);
 	curl.setOpt('URL', 'https://www2.sdcounty.ca.gov/rov/Eng/Voters_found.asp');
 	curl.setOpt('FOLLOWLOCATION', true);
 	curl.setOpt(Curl.option.POSTFIELDS, querystring.stringify(data))
