@@ -7,8 +7,6 @@ const curl = new Curl();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-var output = "";
 	const data = {
 		'houseNumber': '8036',
 		'birthMonth': '05',
@@ -23,20 +21,17 @@ var output = "";
 	curl.setOpt(Curl.option.VERBOSE, false)
 
 	curl.on('end', function (statusCode, data, headers) {
-	//	console.info(statusCode);
-	//	console.info('---');
-	//	console.info(data);
-	res.send(data);
-	//	console.info('---');
-	//	console.info(this.getInfo( 'TOTAL_TIME'));
-		this.close();
+		//	console.info(statusCode);
+		//	console.info('---');
+		//	console.info(data);
+		res.send(data);
+		//	console.info('---');
+		//	console.info(this.getInfo( 'TOTAL_TIME'));
+		//	this.close();
 	});
 
 	curl.on('error', curl.close.bind(curl));
 	curl.perform();
-
-
-
 	//	curl -d "" -H "Content-Type: application/x-www-form-urlencoded" -X POST 
 
 });
