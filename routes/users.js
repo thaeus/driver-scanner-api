@@ -3,12 +3,12 @@ var router = express.Router();
 const { Curl } = require('node-libcurl');
 const querystring = require('querystring');
 
-const curl = new Curl();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
 
+	const curl = new Curl();
 
 	var voterInfo = JSON.parse(req.query.voterInfo);
 	const data = {
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 		'zipCode': voterInfo.zipCode
 	}
 
-	console.log(data);
+	//console.log(data);
 	curl.setOpt('URL', 'https://www2.sdcounty.ca.gov/rov/Eng/Voters_found.asp');
 	curl.setOpt('FOLLOWLOCATION', true);
 	curl.setOpt(Curl.option.POSTFIELDS, querystring.stringify(data))
@@ -32,10 +32,10 @@ router.get('/', function(req, res, next) {
 		res.send(data);
 		//	console.info('---');
 		//	console.info(this.getInfo( 'TOTAL_TIME'));
-		//	this.close();
+		this.close();
 	});
 
-	curl.on('error', curl.close.bind(curl));
+	//curl.on('error', curl.close.bind(curl));
 	curl.perform();
 	//	curl -d "" -H "Content-Type: application/x-www-form-urlencoded" -X POST 
 
